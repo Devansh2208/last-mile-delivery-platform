@@ -1,0 +1,13 @@
+{
+  "name": "last-mile-delivery-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "dependencies": {
+    "react": "18.x",
+    "react-dom": "18.x"
+  }
+}
