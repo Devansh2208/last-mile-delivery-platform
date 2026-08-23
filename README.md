@@ -1,4 +1,9 @@
-Last-Mile Delivery Management System
+## ## Live Demo
+
+- **Frontend:** https://last-mile-delivery-platform-4cto.vercel.app
+- **Backend API:** https://last-mile-delivery-platform.onrender.com
+- **API Documentation:** https://last-mile-delivery-platform.onrender.com/docs
+## Last-Mile Delivery Management System
 
 A full-stack last-mile delivery management platform for managing customers, orders, delivery zones, pricing, delivery agents, order tracking, and role-based operations.
 
