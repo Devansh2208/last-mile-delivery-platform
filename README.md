@@ -1,4 +1,8 @@
+Last-Mile Delivery Management System
 
+A full-stack last-mile delivery management platform for managing customers, orders, delivery zones, pricing, delivery agents, order tracking, and role-based operations.
+
+The system provides a RESTful FastAPI backend, PostgreSQL database, JWT-based authentication, and a responsive frontend for customer, delivery-agent, and admin workflows.
 ## 1. Project Overview
 
 The platform is designed to manage the complete last-mile delivery workflow:
