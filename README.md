@@ -1,26 +1,3 @@
-Yes. I checked **both the assignment PDF and the submission-guidelines PDF again**.
-
-The assignment specifically requires the README to contain:
-
-* Setup guide
-* `.env.example`
-* API documentation
-* Database schema
-* Rate-calculation logic explanation 
-
-And the submission guide requires the GitHub repository to be **public, on `main`, downloadable, and free of `.env`, `node_modules`, build artifacts, and temporary files**. 
-
-One important correction: **the README should not claim features that aren't actually implemented.** The assignment explicitly evaluates auto-assignment, immutable tracking history, failed-delivery/rescheduling, and notifications. 
-
-So use this as the final root `README.md`:
-
-# Last-Mile Delivery Management System
-
-A full-stack last-mile delivery management platform for managing customers, orders, delivery zones, pricing, delivery agents, order tracking, and role-based operations.
-
-The system provides a RESTful FastAPI backend, PostgreSQL database, JWT-based authentication, and a responsive frontend for customer, delivery-agent, and admin workflows.
-
----
 
 ## 1. Project Overview
 
