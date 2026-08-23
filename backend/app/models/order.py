@@ -2,7 +2,7 @@ from enum import Enum
 from uuid import UUID
 
 from sqlalchemy import Enum as SQLEnum
-from sqlalchemy import ForeignKey, Integer, String
+from sqlalchemy import ForeignKey, Integer, String, Numeric
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base, TimestampMixin, UUIDMixin
@@ -13,8 +13,21 @@ class OrderStatus(str, Enum):
     ASSIGNED = "ASSIGNED"
     PICKED_UP = "PICKED_UP"
     IN_TRANSIT = "IN_TRANSIT"
+    OUT_FOR_DELIVERY = "OUT_FOR_DELIVERY"
     DELIVERED = "DELIVERED"
+    FAILED = "FAILED"
+    RESCHEDULED = "RESCHEDULED"
     CANCELLED = "CANCELLED"
+
+
+class OrderType(str, Enum):
+    B2B = "B2B"
+    B2C = "B2C"
+
+
+class PaymentType(str, Enum):
+    PREPAID = "PREPAID"
+    COD = "COD"
 
 
 class Order(UUIDMixin, TimestampMixin, Base):
@@ -53,7 +66,13 @@ class Order(UUIDMixin, TimestampMixin, Base):
         index=True,
     )
 
-    zone_id: Mapped[UUID | None] = mapped_column(
+    pickup_zone_id: Mapped[UUID | None] = mapped_column(
+        ForeignKey("zones.id", ondelete="SET NULL"),
+        nullable=True,
+        index=True,
+    )
+
+    delivery_zone_id: Mapped[UUID | None] = mapped_column(
         ForeignKey("zones.id", ondelete="SET NULL"),
         nullable=True,
         index=True,
@@ -61,6 +80,52 @@ class Order(UUIDMixin, TimestampMixin, Base):
 
     package_weight: Mapped[int] = mapped_column(
         Integer,
+        nullable=False,
+    )
+
+    length: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+    )
+
+    breadth: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+    )
+
+    height: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+    )
+
+    volumetric_weight: Mapped[float] = mapped_column(
+        Numeric(10, 2),
+        nullable=False,
+    )
+
+    billable_weight: Mapped[float] = mapped_column(
+        Numeric(10, 2),
+        nullable=False,
+    )
+
+    order_type: Mapped[OrderType] = mapped_column(
+        SQLEnum(OrderType),
+        nullable=False,
+    )
+
+    payment_type: Mapped[PaymentType] = mapped_column(
+        SQLEnum(PaymentType),
+        nullable=False,
+    )
+
+    calculated_charge: Mapped[float | None] = mapped_column(
+        Numeric(10, 2),
+        nullable=True,
+    )
+
+    cod_surcharge: Mapped[float] = mapped_column(
+        Numeric(10, 2),
+        default=0,
         nullable=False,
     )
 

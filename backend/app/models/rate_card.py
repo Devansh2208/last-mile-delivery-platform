@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from sqlalchemy import ForeignKey, Integer, Numeric
+from sqlalchemy import ForeignKey, Integer, Numeric, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base, TimestampMixin, UUIDMixin
@@ -9,8 +9,20 @@ from app.db.base import Base, TimestampMixin, UUIDMixin
 class RateCard(UUIDMixin, TimestampMixin, Base):
     __tablename__ = "rate_cards"
 
-    zone_id: Mapped[UUID] = mapped_column(
+    origin_zone_id: Mapped[UUID] = mapped_column(
         ForeignKey("zones.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
+
+    destination_zone_id: Mapped[UUID] = mapped_column(
+        ForeignKey("zones.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
+
+    order_type: Mapped[str] = mapped_column(
+        String(10),
         nullable=False,
         index=True,
     )
@@ -22,6 +34,12 @@ class RateCard(UUIDMixin, TimestampMixin, Base):
 
     rate_per_kg: Mapped[int] = mapped_column(
         Integer,
+        nullable=False,
+    )
+
+    cod_surcharge: Mapped[int] = mapped_column(
+        Integer,
+        default=0,
         nullable=False,
     )
 
